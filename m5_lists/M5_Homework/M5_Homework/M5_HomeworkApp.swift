@@ -4,7 +4,7 @@ import SwiftUI
 struct M5_HomeworkApp: App {
     var body: some Scene {
         WindowGroup {
-            SwiftUIView()
+            MainRouterView(router: MainRouter())
         }
     }
 }
