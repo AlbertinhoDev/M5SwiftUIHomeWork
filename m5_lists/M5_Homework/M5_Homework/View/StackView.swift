@@ -2,20 +2,38 @@ import SwiftUI
 
 struct StackView: View {
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                HStack {
-                    Circle().overlay(
-                        AsyncImage(url: URL(string: DataAnimals().animals[0].breeds[0].url) , placeholder: {
-                        Text(verbatim: "Loading...")
-                        })
-                            .frame(width: 100, height: 100)
-                    ).clipShape(Circle())
-                        .frame(width: 250)
-                        .padding(.leading, -50)
- 
-                    Text("Doggi")
-                        .padding(10)
+        GeometryReader { proxy in
+            let size = proxy.size
+            ScrollView {
+                LazyVStack {
+                    ForEach(DataAnimals().animals) { animal in
+                        if #available(iOS 16.0, *) {
+                            Text(animal.name)
+                                .padding(.trailing, size.width * 0.7)
+                                .padding(.bottom, size.height * 0.04)
+                                .font(.system(size: size.width * 0.08))
+                                .foregroundStyle(Color.blue)
+                                .fontWeight(.bold)
+                        }
+                        ForEach(animal.breeds, id: \.id) {species in
+                            HStack {
+                                Circle().overlay(
+                                    AsyncImage(url: URL(string: species.url) , placeholder: {
+                                        Text(verbatim: "Loading...")
+                                    })
+                                )
+                                .clipShape(Circle())
+                                .frame(width: size.width * 0.6)
+                                .position(x: size.width * 0.3, y: size.height * 0.15)
+                                Text(species.name)
+                                    .multilineTextAlignment(.leading)
+                                    .position(x: size.width * 0.3, y: size.height * 0.15)
+                                    .padding(.trailing, size.width * 0.2)
+                                    .font(.system(size: size.width * 0.05))
+                            }
+                        }
+                        .padding()
+                    }
                 }
             }
         }

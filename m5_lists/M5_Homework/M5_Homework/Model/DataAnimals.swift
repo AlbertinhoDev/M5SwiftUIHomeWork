@@ -4,9 +4,10 @@ import SwiftUI
 /// для работы с линивой загрузкой
 /// добавте для генерация уникального id
 /// свойтсво let id = UUID()
-struct Breed {
+struct Breed: Identifiable {
     let name: String
     let url: String
+    let id = UUID()
 }
 
 struct Animal: Identifiable {
@@ -17,11 +18,13 @@ struct Animal: Identifiable {
 
 struct DataAnimals {
     let animals = [
-        Animal(name: "Dog", breeds: [
+        Animal(name: "Dog",
+               breeds: [
             Breed(name: "Bulldog", url: "https://upload.wikimedia.org/wikipedia/commons/b/bf/Bulldog_inglese.jpg"),
             Breed(name: "German Shepard", url: "https://6kcmxu3d7l.a.trbcdn.net/upload/files-new/e1/92/f0/562588_1000x1000.jpg"),
             Breed(name: "Golden Retriever", url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMXfwRp0cQtYI2MYYZDgzszxJzcks8Hl03zA&s")]),
-        Animal(name: "Cat", breeds: [
+        Animal(name: "Cat",
+               breeds: [
             Breed(name: "Siamese", url: "https://media.istockphoto.com/id/177689719/ru/%D1%84%D0%BE%D1%82%D0%BE/%D1%82%D0%B0%D0%B9%D1%81%D0%BA%D0%B8%D0%B9-%D0%B8%D0%BB%D0%B8-%D1%81%D0%B8%D0%B0%D0%BC%D1%81%D0%BA%D0%B0%D1%8F-%D0%BA%D0%BE%D1%88%D0%BA%D0%B0.jpg?s=612x612&w=0&k=20&c=1GftKcPsPb39GFQXSved8AzV5HzQXIcMlTGr6lY06H0="),
             Breed(name: "Persian", url: "https://yac-wh-sb-prod-s3-media-07001.storage.yandexcloud.net/media/images/Shutterstock_180046616.max-2880x1820.format-jpeg.jpg"),
             Breed(name: "Bengal", url: "https://www.proplan.ru/sites/default/files/breeders/%D0%B1%D0%B5%D0%BD%D0%B3%D0%B0%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BE%D1%88%D0%BA%D0%B0%202-min.jpg")]),
